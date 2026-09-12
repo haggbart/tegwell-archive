@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tegwell — Content Archive</title>
+<link rel="icon" href="images/favicon-32x32.png">
+<style>
+:root {
+  --ink: #17120f;
+  --ink-soft: #55483f;
+  --ink-faint: #8d7c70;
+  --bg: #faf6f1;
+  --bg-raised: #fffdfb;
+  --rule: #e4d9cd;
+  --ember: #b4461a;
+  --deep: #14403c;
+  --measure: 40rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f2e9e1; --ink-soft: #c2b2a5; --ink-faint: #8d7c70;
+    --bg: #14100e; --bg-raised: #1c1714; --rule: #33291f;
+    --ember: #f0834f; --deep: #7fc6bd;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.65 "Charter", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--ember); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* cover */
+.cover {
+  position: relative; min-height: 78vh; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 3rem clamp(1.5rem, 6vw, 7rem) 4rem;
+  background: #0c0a09; color: #fff; overflow: hidden;
+}
+.cover::before {
+  content: ""; position: absolute; inset: 0;
+  background: url("images/hotspring_green_field.png") center/cover no-repeat;
+  opacity: .55; filter: saturate(.85);
+}
+.cover::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(8,6,5,.25) 0%, rgba(8,6,5,.55) 55%, rgba(8,6,5,.95) 100%);
+}
+.cover > * { position: relative; z-index: 1; }
+.wordmark {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: .78rem; letter-spacing: .42em; text-transform: uppercase;
+  color: #f6c6a8; margin-bottom: 1.25rem;
+}
+.cover h1 {
+  font-size: clamp(2.4rem, 6.5vw, 4.4rem); line-height: 1.05; font-weight: 400;
+  margin: 0 0 1.25rem; max-width: 18ch; letter-spacing: -.01em;
+}
+.cover p { max-width: 46ch; color: #e5d8ce; margin: 0; font-size: 1.05rem; }
+.downloads { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: .75rem; }
+.dl {
+  display: inline-flex; align-items: baseline; gap: .55rem;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: .85rem; letter-spacing: .02em; text-decoration: none;
+  color: #f6c6a8; border: 1px solid rgba(246,198,168,.4); border-radius: 2rem;
+  padding: .6rem 1.25rem; transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.dl:hover { background: #f6c6a8; border-color: #f6c6a8; color: #14100e; }
+.dl span { font-size: .74rem; opacity: .7; letter-spacing: .06em; }
+.cover .stamp {
+  margin-top: 2.5rem; font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .78rem; letter-spacing: .08em; color: #a99a8e; text-transform: uppercase;
+}
+
+/* layout */
+.shell { display: grid; grid-template-columns: 1fr; gap: 0; }
+@media (min-width: 62rem) {
+  .shell { grid-template-columns: 17rem 1fr; align-items: start; }
+  nav.toc { position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
+}
+nav.toc {
+  scrollbar-width: none;
+  padding: 3rem 1.5rem 4rem clamp(1.5rem, 4vw, 3rem);
+  border-right: 1px solid var(--rule);
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: .85rem;
+}
+nav.toc::-webkit-scrollbar { display: none; }
+nav.toc h2 {
+  font-size: .7rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--ink-faint); margin: 0 0 1.5rem; font-weight: 600;
+}
+.toc-group { margin-bottom: 1.75rem; }
+.toc-group h3 {
+  font-family: inherit; font-size: .8rem; font-weight: 700; margin: 0 0 .5rem;
+  color: var(--ink); letter-spacing: .02em;
+}
+.toc-group ol { list-style: none; margin: 0; padding: 0 0 0 .1rem; }
+.toc-group li { margin: .3rem 0; line-height: 1.35; }
+.toc-group a { color: var(--ink-soft); text-decoration: none; display: block; }
+.toc-group a:hover { color: var(--ember); }
+
+main { padding: 3rem clamp(1.5rem, 5vw, 4.5rem) 6rem; min-width: 0; }
+main > * { max-width: var(--measure); }
+
+/* overview */
+#overview { margin-bottom: 5rem; }
+#overview h2 {
+  font-size: 1.5rem; font-weight: 600; margin: 3rem 0 .75rem;
+  letter-spacing: -.01em;
+}
+#overview h3 { font-size: 1.1rem; margin: 2rem 0 .5rem; }
+#overview > p:first-of-type {
+  font-size: 1.2rem; line-height: 1.55; color: var(--ink-soft);
+}
+
+/* sections */
+header.sec {
+  max-width: none; border-top: 2px solid var(--ink); margin: 5rem 0 2.5rem;
+  padding-top: 1.25rem;
+}
+header.sec h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 400; margin: 0 0 .35rem;
+  letter-spacing: -.015em;
+}
+header.sec p { color: var(--ink-faint); margin: 0; max-width: var(--measure); font-size: .98rem; }
+
+article {
+  max-width: none; border-top: 1px solid var(--rule); padding: 2.5rem 0 1rem;
+}
+article > * { max-width: var(--measure); }
+article h2 {
+  font-size: clamp(1.45rem, 3vw, 1.95rem); font-weight: 600; line-height: 1.2;
+  margin: 0 0 .6rem; letter-spacing: -.012em; scroll-margin-top: 2rem;
+}
+article h3 {
+  font-size: 1.16rem; font-weight: 700; margin: 2.25rem 0 .6rem; color: var(--deep);
+  letter-spacing: -.005em;
+}
+article h4 { font-size: 1rem; margin: 1.75rem 0 .4rem; }
+article p { margin: 0 0 1.1rem; }
+article ul { margin: 0 0 1.2rem; padding-left: 1.1rem; }
+article li { margin: .35rem 0; }
+article li::marker { color: var(--ember); }
+blockquote {
+  margin: 1.5rem 0; padding-left: 1.25rem; border-left: 3px solid var(--ember);
+  font-size: 1.15rem; color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; max-width: 8rem; }
+.byline {
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .8rem;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint);
+  margin: 0 0 1.5rem !important;
+}
+figure { margin: 1.75rem 0; max-width: none; }
+figure img {
+  border-radius: 3px; background: var(--bg-raised);
+  box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 8px 24px -12px rgba(0,0,0,.35);
+}
+figure.hero img { width: 100%; }
+figcaption {
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .78rem;
+  color: var(--ink-faint); margin-top: .5rem;
+}
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .88em; background: var(--bg-raised); border: 1px solid var(--rule);
+  border-radius: 3px; padding: .08em .32em;
+}
+table { border-collapse: collapse; width: 100%; margin: 1.5rem 0; font-size: .95rem; }
+th, td { text-align: left; padding: .5rem .75rem .5rem 0; border-bottom: 1px solid var(--rule); }
+th { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+
+footer.end {
+  max-width: none; margin-top: 5rem; padding-top: 1.5rem;
+  border-top: 2px solid var(--ink);
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .82rem; color: var(--ink-faint);
+}
+
+@media print {
+  nav.toc { display: none; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .cover {
+    min-height: 96vh; break-after: page; background: #0c0a09; color: #fff;
+    padding: 3rem 3rem 4rem;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .cover h1 { font-size: 3rem; }
+  .downloads { display: none; }
+  .shell { display: block; }
+  main { padding: 0; }
+  article, header.sec { break-inside: auto; }
+  article h2, header.sec { break-after: avoid; }
+  figure { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="wordmark">Tegwell</div>
+  <h1>Revolutionizing geothermal energy for a sustainable tomorrow.</h1>
+  <p>The company's public material — technology, solutions, announcements and team — gathered from the website source and its content management system while the site is offline.</p>
+  <div class="stamp">Content archive · Bergen, Norway · material from 2022–2024</div>
+  <div class="downloads">
+    <a class="dl" href="tegwell-archive.pdf" download>Download as PDF <span>46 MB</span></a>
+    <a class="dl" href="https://github.com/haggbart/tegwell-archive/archive/refs/heads/master.zip">Download everything <span>ZIP · 134 MB</span></a>
+  </div>
+</div>
+
+<div class="shell">
+<nav class="toc">
+  <h2>Contents</h2>
+  <div class="toc-group"><h3>Overview</h3><ol><li><a href="#overview">The company</a></li></ol></div>
+  <div class="toc-group"><h3>The site</h3><ol><li><a href="#pages-home">Home</a></li><li><a href="#pages-about-us">About Us</a></li><li><a href="#pages-team">The Team</a></li><li><a href="#pages-investors">Investors</a></li></ol></div>
+<div class="toc-group"><h3>Technology</h3><ol><li><a href="#technology-optimized-closed-loop-well">Optimized Closed-Loop Well</a></li><li><a href="#technology-thermoelectric-power-plant">Thermoelectric Power Plant</a></li></ol></div>
+<div class="toc-group"><h3>Solutions</h3><ol><li><a href="#solutions-community-energy-hubs-surplushavens-by-tegwell">Community Energy Hubs - &quot;SurPlusHavens by Tegwell&quot;</a></li><li><a href="#solutions-decentralized-energy-production">Decentralized Energy Production</a></li><li><a href="#solutions-direct-heat">Direct Heat</a></li><li><a href="#solutions-grid-power">Grid Power</a></li><li><a href="#solutions-hydrogen-production">Hydrogen Production</a></li><li><a href="#solutions-industrial-applications">Industrial Applications</a></li></ol></div>
+<div class="toc-group"><h3>News</h3><ol><li><a href="#news-tegwell-teams-up-with-university-of-agder-on-a-novel-geothermal-project">Tegwell Teams Up with University of Agder on a Novel Geothermal Project</a></li><li><a href="#news-tegwell-pursues-innovative-research-into-geothermal-energy">Tegwell Pursues Innovative Research into Geothermal Energy</a></li><li><a href="#news-revolutionizing-geothermal-energy-with-enhanced-heat-conduction">Revolutionizing Geothermal Energy with Enhanced Heat Conduction</a></li><li><a href="#news-pivot2023">PIVOT2023</a></li></ol></div>
+</nav>
+
+<main>
+  <div id="overview"><p>Tegwell is a geothermal energy company based in Bergen, Norway. Its ambition is to make geothermal energy work <em>anywhere</em> — not only in the few places on Earth where hot water sits conveniently near the surface. Tegwell calls this &quot;geothermal anywhere&quot;, and describes it as the long-promised holy grail of the field.</p>
+<p>The proposition: a single installation delivering three things at once from the heat of the Earth — local heat, hydrogen, and electricity, around the clock, in places that have none of them today.</p>
+<p>The material gathered here is the company&#x27;s public content as it stood in 2024, when the website was last updated. The site has been offline since, and this is the complete record of what it contained — ready to read, to reuse, or to put back up.</p>
+<h3>Two core technologies</h3>
+<p><strong>Optimized Closed-Loop Well.</strong> A coaxial (pipe-in-pipe) closed-loop well, a known concept in shallow geothermal, taken to deep wells. The working fluid circulates in the annulus and never contacts the formation. Tegwell&#x27;s addition: <em>adaptive radial jets</em> — lateral channels branched off the main bore and backfilled with highly conductive material (graphite-based composites), with position and length tuned per site, to raise heat conduction from the rock into the well. Also explored: vacuum insulated tubing (VIT), hydraulic fracturing.</p>
+<p><strong>Thermoelectric Power Plant.</strong> Modular, autonomous, effectively maintenance-free conversion of that heat to electricity. The design goal is plug-and-play operation with minimal training, so communities without technical staff can run one. Validated in lab tests.</p>
+<h3>Solutions (the applications)</h3>
+<ul><li><strong>Direct Heat</strong> – hyper-local heat at point of use; ~80% of residential electricity goes to heat/cooling.</li><li><strong>Grid Power</strong> – geothermal as sustainable base load, with batteries for peak-hour boost.</li><li><strong>Hydrogen Production</strong> – high-temperature electrolysis on site; kills the transport/storage problem. Highway H2 + EV charging stations, ports, industrial zones.</li><li><strong>Industrial Applications</strong> – 24/7 energy to off-grid industrial sites.</li><li><strong>Decentralized Energy Production</strong> – not bound by geography or geology.</li><li><strong>Community Energy Hubs – &quot;SurPlusHavens&quot;</strong> – the flagship concept: self-sufficient communities that generate <em>more</em> energy than they consume and push the surplus back to the surrounding region, while staying grid-interconnected for peaks.</li></ul>
+<h3>Positioning</h3>
+<p>The case Tegwell makes rests on three claims: impact on the global energy crisis, genuinely novel technology, and a rapidly expanding renewable market. Throughout, the material is careful about maturity — the technologies are described as under development and validated in lab tests rather than commercially deployed.</p>
+<h3>Team</h3>
+<table><thead><tr><th>Name</th><th>Role</th></tr></thead><tbody><tr><td>Tomas Finnøy</td><td>CEO</td></tr><tr><td>Sondre Slathia</td><td>CTO (production &amp; automation)</td></tr><tr><td>Benjamin D. Smith</td><td>Geothermal Energy Engineer, PhD candidate in wellbore tech</td></tr><tr><td>Gunstein Skomedal</td><td>Specialist in Thermoelectric Technology</td></tr></tbody></table>
+<h3>Timeline</h3>
+<ul><li><strong>2022-09</strong> – Research collaboration with the <strong>University of Agder</strong>, funded by <strong>RFF Vestland</strong>: thermoelectric generators for fully autonomous plants; radial jet drilling and hydraulic fracturing to raise heat transfer.</li><li><strong>2022-10</strong> – Benjamin Smith brought on to research deep coaxial heat exchanger feasibility; <strong>University of Bergen</strong> + <strong>Reykjavik University</strong> collaboration. State-of-the-art simulations in <strong>FEFLOW (DHI)</strong> and <strong>CMG</strong> showed decades-long extraction is plausible.</li><li><strong>2023-08</strong> – <strong>Patent application filed</strong> for a method of preparing closed-loop geothermal wells for optimal heat conduction.</li><li><strong>2023-10</strong> – <strong>Finalist (top 5) in PIVOT2023</strong>, the startup competition run by <strong>Project Innerspace</strong>, a non-profit pivoting oil &amp; gas tech and talent into geothermal.</li></ul></div>
+  <section id="sec-pages"><header class="sec"><h1>The site</h1><p>How the site presented Tegwell: the home page, the story, the team and the investor pitch.</p></header><article id="pages-home"><h2>Home</h2><h3>Hero</h3>
+<blockquote>Revolutionizing Geothermal Energy for a Sustainable Tomorrow.</blockquote>
+<figure><a href="images/hotspring_green_field.png"><img loading="lazy" width="1456" height="816" src="images/hotspring_green_field.png" alt="Hot spring in a green field"></a><figcaption>Hot spring in a green field</figcaption></figure>
+<h3>Welcome</h3>
+<figure><a href="images/office_chair_empty.png"><img loading="lazy" width="1456" height="816" src="images/office_chair_empty.png" alt=""></a></figure>
+<p>Welcome to Tegwell, where innovation meets sustainability. We specialize in closed-loop geothermal energy solutions that are both economically viable and environmentally friendly. Our advanced technology will harness the Earth&#x27;s natural heat to produce electricity efficiently, offering a reliable and scalable power source that significantly lowers carbon footprint.</p>
+<h3>Our Vision</h3>
+<p>Our Vision: Shaping a sustainable future by making geothermal energy efficient and available to the world.</p>
+<p>Navigate through our website to discover how our Enhanced Geothermal Well and Thermoelectric Power Plant technologies are setting new benchmarks in renewable energy. Explore the diverse potential applications of our systems — from remote energy supply to direct heat use, energy storage and self-sustained communities.</p>
+<h3>Latest news</h3>
+<p><em>Dynamic section pulling the three most recent news articles from Sanity.</em></p></article>
+<article id="pages-about-us"><h2>About Us</h2><h3>Who We Are</h3>
+<figure><a href="images/office_team.png"><img loading="lazy" width="1456" height="816" src="images/office_team.png" alt=""></a></figure>
+<p>We&#x27;re a team of dedicated scientists, engineers, and visionaries committed to redefining the future of renewable energy. Tegwell is not just another energy company; we&#x27;re a think tank of innovation, continuously working on groundbreaking technologies that have the potential to reshape how energy is produced, stored, and distributed.</p>
+<h3>Our Vision</h3>
+<figure><a href="images/little_girl_hope_light.png"><img loading="lazy" width="1456" height="816" src="images/little_girl_hope_light.png" alt=""></a></figure>
+<p>Our vision is a world where communities can be energy-independent yet interconnected, producing more than they consume and sharing the surplus. We strive to create what we call &quot;Surplus Havens&quot; — communities that not only sustain themselves but contribute to the energy needs of surrounding areas.</p>
+<h3>Our Journey</h3>
+<figure><a href="images/greenhouses-1.png"><img loading="lazy" width="1456" height="816" src="images/greenhouses-1.png" alt=""></a></figure>
+<p>From lab prototypes to real-world applications, our journey is a narrative of relentless pursuit for innovation. Though our technologies are still in the development phase, we are actively seeking partnerships and investments to accelerate their transition from concepts to transformative solutions.</p>
+<hr>
+<p>Inspired by what we&#x27;re doing? We invite you to be part of our journey. Contact us to learn how you can get involved.</p></article>
+<article id="pages-team"><h2>The Team</h2><h3>Tomas Finnøy — CEO</h3>
+<figure><a href="images/TomasFinnoy2.png"><img loading="lazy" width="450" height="450" src="images/TomasFinnoy2.png" alt="Tomas Finnøy"></a><figcaption>Tomas Finnøy</figcaption></figure>
+<p>The visionary leading Tegwell into a sustainable future, Tomas is the driving force behind our mission to revolutionize renewable energy.</p>
+<p><a href="https://no.linkedin.com/in/tomas-finn%C3%B8y-79ba9313">LinkedIn</a></p>
+<h3>Sondre Slathia — CTO</h3>
+<figure><a href="images/sondre_slathia2.png"><img loading="lazy" width="450" height="450" src="images/sondre_slathia2.png" alt="Sondre Slathia"></a><figcaption>Sondre Slathia</figcaption></figure>
+<p>Overseeing the production and automation aspects of our projects, Sondre brings a balanced blend of technical and managerial expertise to Tegwell.</p>
+<p><a href="https://no.linkedin.com/in/sondre-slathia-ab975353">LinkedIn</a></p>
+<h3>Benjamin D Smith — Geothermal Energy Engineer</h3>
+<figure><a href="images/Benjamin5.png"><img loading="lazy" width="450" height="450" src="images/Benjamin5.png" alt="Benjamin D Smith"></a><figcaption>Benjamin D Smith</figcaption></figure>
+<p>Benjamin is our geological expert currently pursuing a Ph.D. in well bore technologies. He is instrumental in simulating and developing our Enhanced Geothermal Well solutions.</p>
+<p><a href="https://is.linkedin.com/in/benjamin-smith-2a3293162">LinkedIn</a></p>
+<h3>Gunstein Skomedal — Specialist in Thermoelectric Technology</h3>
+<figure><a href="images/Gunstein_Skomedal4.png"><img loading="lazy" width="450" height="450" src="images/Gunstein_Skomedal4.png" alt="Gunstein Skomedal"></a><figcaption>Gunstein Skomedal</figcaption></figure>
+<p>Associate professor at University of Agder with research on energy materials. PhD in thermoelectrics. He is leading the development of the thermoelectric power plant.</p>
+<p><a href="https://www.linkedin.com/in/gunstein-skomedal-4aa43223">LinkedIn</a></p></article>
+<article id="pages-investors"><h2>Investors</h2><h3>Strategic Partnerships</h3>
+<figure><a href="images/handshake.png"><img loading="lazy" width="1456" height="816" src="images/handshake.png" alt=""></a></figure>
+<p>Collaboration lies at the heart of our ethos. We&#x27;re looking for strategic partners who share our vision for revolutionizing the energy landscape. Your investment could be the catalyst that helps bring these transformative technologies to life, impacting communities, industries, and potentially, the globe.</p>
+<h3>Investment Opportunities</h3>
+<figure><a href="images/steamy_office.png"><img loading="lazy" width="1456" height="816" src="images/steamy_office.png" alt=""></a></figure>
+<p>Tegwell is at the forefront of shaping the future of renewable energy, emphasizing decentralized and self-sustaining solutions that can serve a myriad of applications. From Enhanced Geothermal Wells to Thermoelectric Power Plants, our focus lies in pioneering technologies that offer versatile energy production and storage options.</p>
+<h3>Benefits of Investing</h3>
+<ul><li><strong>Impact:</strong> Contribute to solutions for the global energy crisis.</li><li><strong>Innovation:</strong> Be part of revolutionary technological advancements.</li><li><strong>Growth:</strong> Tap into a rapidly expanding renewable energy market.</li></ul>
+<hr>
+<p>Interested in becoming a part of our journey? Contact us for more information on investment opportunities.</p></article></section>
+<section id="sec-technology"><header class="sec"><h1>Technology</h1><p>The two core technologies under development.</p></header><article id="technology-optimized-closed-loop-well"><h2>Optimized Closed-Loop Well</h2><figure class="hero"><a href="images/Capture_an_aerial_view_of_a_tranquil_untouched_expanse.png"><img loading="lazy" width="1456" height="816" src="images/Capture_an_aerial_view_of_a_tranquil_untouched_expanse.png" alt=""></a></figure><p>Uncover the next stage in geothermal energy—Tegwell&#x27;s Optimized Closed-Loop Well technology. Designed to break new ground in harnessing the Earth&#x27;s heat reserves, we&#x27;re setting new standards in efficient and sustainable geothermal energy production.</p>
+<h3>Coaxial Closed-Loop Well: The Basics</h3>
+<p>A coaxial closed-loop well is a well-known concept in shallow geothermal systems, we plan to use this system in deep wells with improved efficiency. Utilization of this energy extraction will deliver on the long promised &#x27;holy grail&#x27; of geothermal energy; giving us geothermal anywhere. This design involves a dual-pipe arrangement, where one pipe is enclosed within another, forming an annular space. In a typical closed-loop system, a working fluid circulates through this confined space, absorbing heat from the surrounding geological formations without direct interaction with them.</p>
+<h3>Tegwell’s Innovative Approach: Optimized Closed-Loop Well</h3>
+<p>At Tegwell, we are actively developing modifications to the traditional coaxial closed-loop well to maximize its efficiency and adaptability.</p>
+<h3>Adaptative Radial Jets</h3>
+<p>We plan to use radial jet technology that creates channels that branch from the main well, which will be filled with highly conductive materials such as graphite based composites or similar. These adaptations aim to facilitate more effective heat conduction from surrounding rocks and enable optimal heat transport. The positioning and length of the lateral channels are customizable to suit the specific geological conditions of each site. This ensures that the system can maximize heat extraction and be versatile, functioning efficiently across a variety of geological environments.</p>
+<h3>Enhanced Operational Efficiency</h3>
+<p>We are focusing on designing a system that extracts energy efficiently as the working fluid circulates, reducing the energy needed for operation and the frequency of maintenance interventions. The goal is to create a well that can operate autonomously, optimizing the balance between energy output and operational cost.</p>
+<h3>Vision for the Future</h3>
+<p>The optimized closed-loop well we are developing could represent a significant advancement in geothermal technology, potentially enabling broader application and bringing us a step closer to realizing the true potential of geothermal energy. This development is ongoing, and we’re working with dedication and expertise to explore the transformative possibilities this concept can bring to the geothermal energy landscape.</p>
+<figure><a href="images/CoaxialGraphicDesign.png"><img loading="lazy" width="794" height="1123" src="images/CoaxialGraphicDesign.png" alt=""></a></figure></article>
+<article id="technology-thermoelectric-power-plant"><h2>Thermoelectric Power Plant</h2><figure class="hero"><a href="images/a_very_small_geothermal_power_plant_producing_clean.png"><img loading="lazy" width="1024" height="1024" src="images/a_very_small_geothermal_power_plant_producing_clean.png" alt=""></a></figure><p>Discover the frontier of geothermal power with Tegwell&#x27;s Thermoelectric Power Plant. We&#x27;re redefining what&#x27;s possible in clean energy, focusing on autonomous, user-friendly solutions for a sustainable tomorrow.</p>
+<h3>Why Thermoelectric?</h3>
+<p>Move beyond the constraints of traditional technology. Our Thermoelectric Power Plant offers a seamless, autonomous process for generating energy. Its modular design allows for unprecedented adaptability, meeting the energy needs of diverse communities and industrial settings.</p>
+<h3>A Revolution in Efficiency</h3>
+<p>Our Thermoelectric Power Plant technology has demonstrated exciting prospects in lab tests, setting the stage for its potential as a staple in the renewable energy landscape.</p>
+<p>Accessibility is at the heart of our design. Our Thermoelectric Power Plant can be operated with minimal training, making renewable energy attainable for communities worldwide.</p>
+<h3>Zero-Maintenance Autonomy</h3>
+<p>What sets our system apart is its autonomous nature. Virtually maintenance-free and requiring no specialized oversight, it’s a plug-and-play solution for continual energy supply.</p></article></section>
+<section id="sec-solutions"><header class="sec"><h1>Solutions</h1><p>Where the technology was meant to be applied.</p></header><article id="solutions-community-energy-hubs-surplushavens-by-tegwell"><h2>Community Energy Hubs - &quot;SurPlusHavens by Tegwell&quot;</h2><figure class="hero"><a href="images/community-view-2.png"><img loading="lazy" width="1456" height="816" src="images/community-view-2.png" alt=""></a></figure><h3>Welcome to SurPlusHavens—Tomorrow&#x27;s Communities Today</h3>
+<p>At Tegwell, we believe that energy solutions should not only be sustainable but should also enrich the communities they serve. That&#x27;s where our SurPlusHavens come into the picture—a groundbreaking concept in self-sufficient, energy-contributing communities.</p>
+<h4>Transforming How We Live</h4>
+<p>By integrating our innovative Enhanced Geothermal Wells and Thermoelectric Power Plants directly into the community infrastructure, SurPlusHavens go beyond mere sustainability. These unique ecosystems generate more than enough energy for their own needs, contributing surplus energy back to the surrounding regions.</p>
+<h4>Key Features</h4>
+<ul><li><strong>24/7 Energy Production:</strong> Our systems operate around the clock, guaranteeing consistent power and heat, all year round.</li><li><strong>Localized Production:</strong> Close-to-source energy generation minimizes losses, making it ultra-efficient.</li><li><strong>Easy Integration:</strong> Designed to be simple to operate, these hubs require minimal technical expertise.</li></ul>
+<h4>Building Bridges, Not Barriers</h4>
+<p>SurPlusHavens serve as dynamic nodes within larger networks, bolstering regional energy grids while benefiting from grid interconnectivity during peak demand, thanks to integrated battery systems.</p>
+<h3>The Future is Now</h3>
+<p>Join us in reimagining how communities can become cornerstones in a new era of distributed, renewable energy. With SurPlusHavens, we&#x27;re not just sustaining; we&#x27;re enriching and giving back.</p>
+<blockquote>When the sun sets, our SurPlusHavens keep the light—and hope—alive.</blockquote></article>
+<article id="solutions-decentralized-energy-production"><h2>Decentralized Energy Production</h2><figure class="hero"><a href="images/collage_featuring_various_landscapes.png"><img loading="lazy" width="1456" height="816" src="images/collage_featuring_various_landscapes.png" alt=""></a></figure><p>Empower communities near and far with Tegwell&#x27;s transformative approach to decentralized energy. Our technology makes sustainable, reliable energy a viable option everywhere.</p>
+<h3>Power Without Borders</h3>
+<p>Our unique thermoelectric and enhanced well technologies are not bound by geological or geographical constraints. This unlocks unprecedented opportunities for decentralized energy production.</p>
+<h3>User-Centric Design</h3>
+<p>Our energy solutions are designed for autonomy and simplicity, lowering the barriers for community-led energy management. Whether you&#x27;re in a bustling city or a remote village, our systems are easy to operate.</p>
+<h3>Robust &amp; Resilient</h3>
+<p>Tegwell&#x27;s thermoelectric systems are robust, offering steadfast energy production even under the most challenging conditions.</p></article>
+<article id="solutions-direct-heat"><h2>Direct Heat</h2><figure class="hero"><a href="images/district-heating.png"><img loading="lazy" width="1024" height="1024" src="images/district-heating.png" alt=""></a></figure><p>Step into the new age of localized direct heat solutions with Tegwell. From individual households to industrial complexes, we&#x27;re shifting the paradigm from centralized to localized heat supply—enabling unprecedented efficiency and customization.</p>
+<h3>Hyper-Local Efficiency</h3>
+<p>Say goodbye to the inefficiencies of long-distance heat supply. Our advanced geothermal systems deliver heat directly where it&#x27;s needed, minimizing energy loss and maximizing efficiency. Around 80% of residential electricity use is for heat and cooling where direct heat is much more suitable and efficient.</p>
+<h3>Tailored to Your Needs</h3>
+<p>Our technology isn&#x27;t one-size-fits-all; it&#x27;s customizable to fit specific heat requirements, from the home environment to the factory floor. Experience truly tailored heating solutions, adapted to your unique needs.</p>
+<h3>Economical &amp; Eco-Friendly</h3>
+<p>Embrace both economic and ecological benefits. By producing heat at the point of use, our technology drastically cuts both costs and emissions.</p></article>
+<article id="solutions-grid-power"><h2>Grid Power</h2><figure class="hero"><a href="images/juxtaposed_image_contrasting_a_complex_tangled.png"><img loading="lazy" width="1456" height="816" src="images/juxtaposed_image_contrasting_a_complex_tangled.png" alt=""></a></figure><p>Step into the new age of localized direct heat solutions with Tegwell. From individual households to industrial complexes, we&#x27;re shifting the paradigm from centralized to localized heat supply—enabling unprecedented efficiency and customization.</p>
+<h3>Grid Power: A New Era of Energy Integration</h3>
+<p>As the global demand for sustainable energy continues to rise, integrating renewable energy sources into the main power grid becomes paramount. At Tegwell, we&#x27;re envisioning and developing innovative geothermal solutions that can seamlessly blend into the grid.</p>
+<h3>Sustainable Base Load Power</h3>
+<p>Traditional energy sources often face intermittency issues, leading to power outages or the need for supplementary power sources. Tegwell&#x27;s geothermal solutions aim to provide a consistent base load power, ensuring a continuous power supply without the peaks and troughs associated with some renewable sources.</p>
+<h3>Peak Hour Optimization</h3>
+<p>Our system is designed to run 24/7. However, with supplementary battery support, we anticipate higher output capabilities during peak hours. This not only addresses power demand surges but also offers potential to stabilize grid supply during high-demand periods.</p>
+<h3>Versatile Integration</h3>
+<p>The modular design of our geothermal solution, currently under conceptualization, is intended to allow easy integration into diverse grid systems, from urban infrastructures to remote locales. Our aim is to ensure that wherever there&#x27;s a grid, there&#x27;s potential for sustainable geothermal energy input.</p></article>
+<article id="solutions-hydrogen-production"><h2>Hydrogen Production</h2><figure class="hero"><a href="images/hydrogen_filling_station.png"><img loading="lazy" width="1456" height="816" src="images/hydrogen_filling_station.png" alt=""></a></figure><p>Our emerging geothermal well and thermoelectric technologies have the potential to revolutionize hydrogen production and e-fuels. Locally produced and stored hydrogen mitigates the issues with remote production, transportation and storage of hydrogen, which is the biggest hurdle for hydrogen adoption in the world today. Leveraging High-Temperature Hydrogen Electrolysis, we aim to facilitate efficient, localized hydrogen generation for the future.</p>
+<h3>Potential Applications:</h3>
+<ul><li><strong>Hydrogen Filling Stations:</strong> Imagine strategically-placed hydrogen stations along major highways, fueling the green transportation of tomorrow.</li><li><strong>EV Charging Stations:</strong> These could sit alongside hydrogen stations, maximizing the efficient use of both heat and electricity generated on-site.</li><li><strong>Infrastructure Advantages:</strong> Our envisioned technology could offer heating and base load power at key points, enhancing the infrastructure along these routes.</li><li><strong>Industrial and Dockside Potential:</strong> Picture our units in industrial zones or ports, streamlining hydrogen supply and consumption right where it&#x27;s needed.</li></ul></article>
+<article id="solutions-industrial-applications"><h2>Industrial Applications</h2><figure class="hero"><a href="images/Aerial_view_of_an_industrial_complex.png"><img loading="lazy" width="1456" height="816" src="images/Aerial_view_of_an_industrial_complex.png" alt=""></a></figure><p>We have a unique technology to redefine how industry can utilize energy. Our innovative geothermal well and thermoelectric power plant technologies could provide a trifecta of localized heat, hydrogen, and electricity. These technologies aim to augment or even replace traditional energy sources, paving the way for more sustainable and efficient industrial operations.</p>
+<h3>Potential Applications:</h3>
+<ul><li><strong>Localized Energy:</strong> Tailored solutions could bring 24/7 energy directly to industrial sites in off-grid or energy-lacking locations.</li><li><strong>Heat Supply:</strong> From process heating to space heating, imagine fulfilling your heat needs right on site.</li><li><strong>Hydrogen Production:</strong> Anticipate your hydrogen needs being met locally, reducing transport and storage complexities.</li><li><strong>Sustainable Electricity:</strong> Envision reducing the reliance on external power grids, enhancing energy security and reducing carbon footprints.</li></ul></article></section>
+<section id="sec-news"><header class="sec"><h1>News</h1><p>Everything Tegwell announced publicly, oldest first.</p></header><article id="news-tegwell-teams-up-with-university-of-agder-on-a-novel-geothermal-project"><h2>Tegwell Teams Up with University of Agder on a Novel Geothermal Project</h2><p class="byline">2022-09-01 · Tomas Finnøy</p><figure class="hero"><a href="images/rffvestland3.png"><img loading="lazy" width="725" height="293" src="images/rffvestland3.png" alt=""></a></figure><p><em>Bergen, Norway</em> – Tegwell is thrilled to announce its upcoming research collaboration with the University of Agder. Thanks to the support from RFF Vestland, we are diving deep into novel ways of harnessing geothermal energy.</p>
+<h3>Thermoelectric Generators: A Game Changer</h3>
+<p>The heart of this project lies in the development of thermoelectric generators, envisioned to power fully autonomous plants. More than just autonomy, these generators aim to simplify the operation so much that even individuals with minimal technical background can manage them, opening doors to a wider range of operators.</p>
+<figure><a href="images/uia.png"><img loading="lazy" width="429" height="146" src="images/uia.png" alt=""></a></figure>
+<h3>Revolutionizing Closed-Loop Systems</h3>
+<p>Building on the foundation of closed-loop geothermal wells, the research aims to amplify their capabilities. With techniques such as radial jet drilling and hydraulic fracturing in the spotlight, our team hopes to magnify heat transfer rates, thereby enhancing overall efficiency.</p>
+<h3>Setting Sights on a Brighter, Sustainable Future</h3>
+<p>As Tegwell joins hands with the academic stalwarts at the University of Agder, we remain committed to pioneering innovative and sustainable energy solutions that can truly make a difference.</p>
+<p>by Tomas Finnøy — Thursday, September 1, 2022</p></article>
+<article id="news-tegwell-pursues-innovative-research-into-geothermal-energy"><h2>Tegwell Pursues Innovative Research into Geothermal Energy</h2><p class="byline">2022-10-01 · Tomas Finnøy</p><figure class="hero"><a href="images/hotspring_green_field (1).png"><img loading="lazy" width="1456" height="816" src="images/hotspring_green_field (1).png" alt=""></a></figure><p>Tegwell is pursuing research in the growing field of geothermal energy technology. They have brought on Benjamin Smith to research the feasibility and reliability of deep coaxial heat exchangers. The University of Bergen and Reykjavik University are working together to leverage their knowledge in oil extraction and geothermal energy.</p>
+<h3>Combining backgrounds from oil/gas and geothermal</h3>
+<p>The way forward with geothermal involves technologies and techniques from the oil/gas and geothermal sectors. This project works to combine the knowledge gained from advances in both fields. Advances in drilling techniques is a fast-growing and exciting area of development. These advances have many possible applications to improve geothermal energy viability in new areas.</p>
+<h3>State-of-the-art simulations</h3>
+<p>Tegwell is performing state-of-the-art simulations to predict deep coaxial heat exchangers&#x27; thermal response and longevity. These numerical simulations utilize two different programs to have redundancy and confidence. The simulations are done in FEFLOW by Mike Powered by DHI and CMG. Two leading software in the academic field. These simulations have shown a strong possibility to extract geothermal energy from coaxial heat exchangers for decades.</p>
+<h3>Advances that can be applied to geothermal energy</h3>
+<p>Advances in drilling techniques are exciting, but how can they be applied to geothermal heat extraction? Tegwell has explored how these can be applied.</p>
+<ul><li>Vacuum Insulated Tubing (VIT): Has the ability to transfer heat from deep areas to the surface with minimum heat loss.</li><li>Radial Jet Drilling (RDJ): Advanced drilling technique to better connect the wellbore to the surrounding rock.</li><li>Conductive Material: Specialized carbon-based materials used to increase heat conduction and flow for heat exchangers.</li><li>Plug and perf: Technique used to increase contact with the surrounding rock that can then be filled with conductive material to increase heat extraction rates.</li></ul>
+<h3>The road ahead</h3>
+<p>The future of energy has always been an exciting topic, now more than ever. Tegwell aims to take the next step forward and redefine how we interact with and utilize energy. Closed-loop systems have the ability to power not only our energy needs but also the needs of the next generation.</p></article>
+<article id="news-revolutionizing-geothermal-energy-with-enhanced-heat-conduction"><h2>Revolutionizing Geothermal Energy with Enhanced Heat Conduction</h2><p class="byline">2023-08-28 · Tomas Finnøy</p><figure class="hero"><a href="images/patent-pending3.png"><img loading="lazy" width="2304" height="2262" src="images/patent-pending3.png" alt=""></a></figure><p><em>Bergen, Norway -</em> Tegwell is taking a significant leap in geothermal energy innovation. We&#x27;ve recently applied for a patent centered on an ingenious method to prepare closed-loop geothermal wells for optimal heat conduction.</p>
+<h4>Pioneering a New Methodology for Geothermal Wells</h4>
+<p>Tegwell stands at the forefront of a groundbreaking venture into geothermal energy. Our recent patent application introduces a distinct method tailored for the preparation of closed-loop geothermal wells. This approach is dedicated to enhancing the heat conduction from the surrounding rock into the well itself.</p>
+<h4>Harnessing Advanced Techniques for Superior Conduction</h4>
+<p>Our method, while rooted in established drilling techniques, ventures into innovative territories. We&#x27;ve focused on preparing the geothermal well in such a way that it optimally extracts heat from its surroundings. By creating channels that improve energy conduction and adapting certain preparation techniques, we aim to maximize the efficiency of the closed-loop system.</p>
+<h4>Addressing the Challenge of Heat Extraction</h4>
+<p>Conventional geothermal wells often face challenges when it comes to maximizing heat extraction. Tegwell&#x27;s approach is designed to break these barriers. Our method aims to significantly boost the heat-conduction capability of the rock surrounding the well, leading to heightened extraction efficiency.</p>
+<h4>A Vision for the Future</h4>
+<p>With the patent application now under review, Tegwell continues to work ardently on refining and optimizing our approach. We are optimistic about its transformative potential in the geothermal industry and look forward to its widespread application.</p>
+<p>Stay tuned as Tegwell reshapes the future of geothermal energy extraction!</p></article>
+<article id="news-pivot2023"><h2>PIVOT2023</h2><p class="byline">2023-10-05 · Tomas Finnøy</p><figure class="hero"><a href="images/PIVOT2023.jpeg"><img loading="lazy" width="1179" height="664" src="images/PIVOT2023.jpeg" alt=""></a></figure><h3>Tegwell is a Finalist in the PIVOT2023 Startup Competition</h3>
+<p>Project Innerspace is a non-profit that aims to promote and transition our energy mix to geothermal sources. A key aim of Project Innerspace is to pivot technologies and resources from the oil and gas industry to the geothermal sector. Tegwell Tech was selected from all the applicants to be in the top five new geothermal companies working towards that goal.</p>
+<h3>A unique and novel look at how energy can be extracted from geothermal sources</h3>
+<p>Tegwell has been noticed for its innovative techniques for accessing and utilizing geothermal energy. We see sustainability as a major pillar in our energy future. Creating closed-loop systems provides decades-long geothermal energy to future generations. Seeing many other companies and people excited to work for a better future is exciting.</p>
+<p>See the post on <a href="https://www.linkedin.com/posts/geothermal-jamie-beard_pivot2023-geothermal-geothermaldecade-activity-7099862697877336064-KuaI?utm_source=share&amp;utm_medium=member_desktop">LinkedIn</a> and view the conference and other teams at <a href="https://projectinnerspace.org/pivot-2023/">Project Innerspace PIVOT2023</a></p></article></section>
+  <footer class="end">Tegwell's published material, gathered from the website and its content system.</footer>
+</main>
+</div>
+
+</body>
+</html>

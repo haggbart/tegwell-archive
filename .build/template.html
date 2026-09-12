@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tegwell — Content Archive</title>
+<link rel="icon" href="images/favicon-32x32.png">
+<style>
+:root {
+  --ink: #17120f;
+  --ink-soft: #55483f;
+  --ink-faint: #8d7c70;
+  --bg: #faf6f1;
+  --bg-raised: #fffdfb;
+  --rule: #e4d9cd;
+  --ember: #b4461a;
+  --deep: #14403c;
+  --measure: 40rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f2e9e1; --ink-soft: #c2b2a5; --ink-faint: #8d7c70;
+    --bg: #14100e; --bg-raised: #1c1714; --rule: #33291f;
+    --ember: #f0834f; --deep: #7fc6bd;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.65 "Charter", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--ember); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--ink); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* cover */
+.cover {
+  position: relative; min-height: 78vh; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 3rem clamp(1.5rem, 6vw, 7rem) 4rem;
+  background: #0c0a09; color: #fff; overflow: hidden;
+}
+.cover::before {
+  content: ""; position: absolute; inset: 0;
+  background: url("images/hotspring_green_field.png") center/cover no-repeat;
+  opacity: .55; filter: saturate(.85);
+}
+.cover::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(8,6,5,.25) 0%, rgba(8,6,5,.55) 55%, rgba(8,6,5,.95) 100%);
+}
+.cover > * { position: relative; z-index: 1; }
+.wordmark {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: .78rem; letter-spacing: .42em; text-transform: uppercase;
+  color: #f6c6a8; margin-bottom: 1.25rem;
+}
+.cover h1 {
+  font-size: clamp(2.4rem, 6.5vw, 4.4rem); line-height: 1.05; font-weight: 400;
+  margin: 0 0 1.25rem; max-width: 18ch; letter-spacing: -.01em;
+}
+.cover p { max-width: 46ch; color: #e5d8ce; margin: 0; font-size: 1.05rem; }
+.downloads { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: .75rem; }
+.dl {
+  display: inline-flex; align-items: baseline; gap: .55rem;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: .85rem; letter-spacing: .02em; text-decoration: none;
+  color: #f6c6a8; border: 1px solid rgba(246,198,168,.4); border-radius: 2rem;
+  padding: .6rem 1.25rem; transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.dl:hover { background: #f6c6a8; border-color: #f6c6a8; color: #14100e; }
+.dl span { font-size: .74rem; opacity: .7; letter-spacing: .06em; }
+.cover .stamp {
+  margin-top: 2.5rem; font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .78rem; letter-spacing: .08em; color: #a99a8e; text-transform: uppercase;
+}
+
+/* layout */
+.shell { display: grid; grid-template-columns: 1fr; gap: 0; }
+@media (min-width: 62rem) {
+  .shell { grid-template-columns: 17rem 1fr; align-items: start; }
+  nav.toc { position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
+}
+nav.toc {
+  scrollbar-width: none;
+  padding: 3rem 1.5rem 4rem clamp(1.5rem, 4vw, 3rem);
+  border-right: 1px solid var(--rule);
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: .85rem;
+}
+nav.toc::-webkit-scrollbar { display: none; }
+nav.toc h2 {
+  font-size: .7rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--ink-faint); margin: 0 0 1.5rem; font-weight: 600;
+}
+.toc-group { margin-bottom: 1.75rem; }
+.toc-group h3 {
+  font-family: inherit; font-size: .8rem; font-weight: 700; margin: 0 0 .5rem;
+  color: var(--ink); letter-spacing: .02em;
+}
+.toc-group ol { list-style: none; margin: 0; padding: 0 0 0 .1rem; }
+.toc-group li { margin: .3rem 0; line-height: 1.35; }
+.toc-group a { color: var(--ink-soft); text-decoration: none; display: block; }
+.toc-group a:hover { color: var(--ember); }
+
+main { padding: 3rem clamp(1.5rem, 5vw, 4.5rem) 6rem; min-width: 0; }
+main > * { max-width: var(--measure); }
+
+/* overview */
+#overview { margin-bottom: 5rem; }
+#overview h2 {
+  font-size: 1.5rem; font-weight: 600; margin: 3rem 0 .75rem;
+  letter-spacing: -.01em;
+}
+#overview h3 { font-size: 1.1rem; margin: 2rem 0 .5rem; }
+#overview > p:first-of-type {
+  font-size: 1.2rem; line-height: 1.55; color: var(--ink-soft);
+}
+
+/* sections */
+header.sec {
+  max-width: none; border-top: 2px solid var(--ink); margin: 5rem 0 2.5rem;
+  padding-top: 1.25rem;
+}
+header.sec h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 400; margin: 0 0 .35rem;
+  letter-spacing: -.015em;
+}
+header.sec p { color: var(--ink-faint); margin: 0; max-width: var(--measure); font-size: .98rem; }
+
+article {
+  max-width: none; border-top: 1px solid var(--rule); padding: 2.5rem 0 1rem;
+}
+article > * { max-width: var(--measure); }
+article h2 {
+  font-size: clamp(1.45rem, 3vw, 1.95rem); font-weight: 600; line-height: 1.2;
+  margin: 0 0 .6rem; letter-spacing: -.012em; scroll-margin-top: 2rem;
+}
+article h3 {
+  font-size: 1.16rem; font-weight: 700; margin: 2.25rem 0 .6rem; color: var(--deep);
+  letter-spacing: -.005em;
+}
+article h4 { font-size: 1rem; margin: 1.75rem 0 .4rem; }
+article p { margin: 0 0 1.1rem; }
+article ul { margin: 0 0 1.2rem; padding-left: 1.1rem; }
+article li { margin: .35rem 0; }
+article li::marker { color: var(--ember); }
+blockquote {
+  margin: 1.5rem 0; padding-left: 1.25rem; border-left: 3px solid var(--ember);
+  font-size: 1.15rem; color: var(--ink-soft); font-style: italic;
+}
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; max-width: 8rem; }
+.byline {
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .8rem;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint);
+  margin: 0 0 1.5rem !important;
+}
+figure { margin: 1.75rem 0; max-width: none; }
+figure img {
+  border-radius: 3px; background: var(--bg-raised);
+  box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 8px 24px -12px rgba(0,0,0,.35);
+}
+figure.hero img { width: 100%; }
+figcaption {
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .78rem;
+  color: var(--ink-faint); margin-top: .5rem;
+}
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .88em; background: var(--bg-raised); border: 1px solid var(--rule);
+  border-radius: 3px; padding: .08em .32em;
+}
+table { border-collapse: collapse; width: 100%; margin: 1.5rem 0; font-size: .95rem; }
+th, td { text-align: left; padding: .5rem .75rem .5rem 0; border-bottom: 1px solid var(--rule); }
+th { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+
+footer.end {
+  max-width: none; margin-top: 5rem; padding-top: 1.5rem;
+  border-top: 2px solid var(--ink);
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .82rem; color: var(--ink-faint);
+}
+
+@media print {
+  nav.toc { display: none; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .cover {
+    min-height: 96vh; break-after: page; background: #0c0a09; color: #fff;
+    padding: 3rem 3rem 4rem;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .cover h1 { font-size: 3rem; }
+  .downloads { display: none; }
+  .shell { display: block; }
+  main { padding: 0; }
+  article, header.sec { break-inside: auto; }
+  article h2, header.sec { break-after: avoid; }
+  figure { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="wordmark">Tegwell</div>
+  <h1>Revolutionizing geothermal energy for a sustainable tomorrow.</h1>
+  <p>The company's public material — technology, solutions, announcements and team — gathered from the website source and its content management system while the site is offline.</p>
+  <div class="stamp">Content archive · Bergen, Norway · material from 2022–2024</div>
+  <div class="downloads">
+    {{DOWNLOADS}}
+    <a class="dl" href="https://github.com/haggbart/tegwell-archive/archive/refs/heads/master.zip">Download everything <span>ZIP · 134 MB</span></a>
+  </div>
+</div>
+
+<div class="shell">
+<nav class="toc">
+  <h2>Contents</h2>
+  <div class="toc-group"><h3>Overview</h3><ol><li><a href="#overview">The company</a></li></ol></div>
+  {{TOC}}
+</nav>
+
+<main>
+  <div id="overview">{{OVERVIEW}}</div>
+  {{BODY}}
+  <footer class="end">Tegwell's published material, gathered from the website and its content system.</footer>
+</main>
+</div>
+
+</body>
+</html>
